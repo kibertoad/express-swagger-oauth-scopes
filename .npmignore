@@ -1,0 +1,6 @@
+.idea/
+.npmignore
+.nyc_output/
+node_modules/
+test/
+README.md
