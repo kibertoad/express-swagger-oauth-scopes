@@ -1,0 +1,25 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Security Test
+  license:
+    name: MIT
+securityDefinitions:
+  oauth:
+    type: oauth2
+    authorizationUrl: 'http://api.example.com/api/auth'
+    flow: implicit
+    scopes:
+      'read:root': read permissions for root endpoint
+host: test.swagger.io
+schemes:
+  - http
+paths:
+  /:
+    get:
+      security:
+        - oauth:
+            - 'read:root'
+      responses:
+        '200':
+          description: OK
