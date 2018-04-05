@@ -12,7 +12,25 @@ router.get('/', oauthScopes(swaggerDocument, extractor), async (req, res, next) 
 	try {
 		res.send('ok');
 	} catch (e) {
-		logger.error('Error while processing request: ', e);
+		console.error('Error while processing request: ', e);
+		next(e);
+	}
+});
+
+router.get('/doc', oauthScopes(swaggerDocument, extractor), async (req, res, next) => {
+	try {
+		res.send('ok');
+	} catch (e) {
+		console.error('Error while processing request: ', e);
+		next(e);
+	}
+});
+
+router.get('/wrong', oauthScopes(swaggerDocument, extractor), async (req, res, next) => {
+	try {
+		res.send('ok');
+	} catch (e) {
+		console.error('Error while processing request: ', e);
 		next(e);
 	}
 });

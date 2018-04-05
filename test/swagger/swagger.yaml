@@ -11,6 +11,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'read:root': read permissions for root endpoint
+      'read:doc': read permissions for root endpoint
 host: test.swagger.io
 schemes:
   - http
@@ -20,6 +21,14 @@ paths:
       security:
         - oauth:
             - 'read:root'
+      responses:
+        '200':
+          description: OK
+  /doc:
+    get:
+      security:
+        - oauth:
+            - 'read:doc'
       responses:
         '200':
           description: OK

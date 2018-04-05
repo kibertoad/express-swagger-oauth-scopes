@@ -4,7 +4,7 @@ beforeEach(() => {
 	global.sinon = sinon.sandbox.create();
 });
 
-afterEach(function () {
+after(function () {
 	this.timeout(10000);
 	global.sinon.restore();
 
