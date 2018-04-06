@@ -13,7 +13,7 @@ const swaggerDocument = swaggerService.getSwaggerSync() // valid Swagger documen
 function getNewSwaggerOauthInstance() {
 	return swaggerOauth(swaggerDocument, authUtils.getPermissionsFromRequest);
 }
- 
+
 router.post('/users',
 	getNewSwaggerOauthInstance(),
 	async (req, res, next) => {
