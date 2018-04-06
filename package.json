@@ -9,6 +9,8 @@
   "license": "MIT",
   "scripts": {
     "test": "mocha --opts \"./mocha.opts\" test/**/*.spec.js",
+    "test-with-coverage": "nyc mocha --opts \"./mocha.opts\" test",
+    "test-travis": "npm run eslint && nyc mocha --opts \"./mocha.opts\" test",
     "prettier": "prettier --write \"{lib,test}/**/*.{js,ts}\"",
     "eslint": "eslint --format codeframe \"lib/**/*.js\" \"test/**/*.js\""
   },
@@ -17,7 +19,6 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "coveralls": "^3.0.0",
     "eslint": "^4.19.1",
     "eslint-plugin-prettier": "^2.6.0",
     "express": "^4.16.3",
@@ -27,5 +28,24 @@
     "prettier": "^1.11.1",
     "sinon": "^4.5.0",
     "supertest": "^3.0.0"
+  },
+  "nyc": {
+    "description": "test coverage",
+    "exclude": [
+      "node_modules",
+      "test",
+      "build"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "cache": true,
+    "all": true,
+    "report-dir": "./build/reports/coverage",
+    "check-coverage": true,
+    "lines": 80,
+    "statements": 80,
+    "functions": 60,
+    "branches": 75
   }
 }
