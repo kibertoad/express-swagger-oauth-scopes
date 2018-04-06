@@ -8,23 +8,19 @@ const swaggerDocument = yaml.safeLoad(swaggerFile);
 const oauthScopes = require("../../lib/oauth-scopes.middleware");
 const extractor = require("../extractors/simple.scopes.extractor");
 
-router.get(
-  "/",
-  oauthScopes(swaggerDocument, extractor),
-  async (req, res, next) => {
-    try {
-      res.send("ok");
-    } catch (e) {
-      console.error("Error while processing request: ", e);
-      next(e);
-    }
+router.get("/", oauthScopes(swaggerDocument, extractor), (req, res, next) => {
+  try {
+    res.send("ok");
+  } catch (e) {
+    console.error("Error while processing request: ", e);
+    next(e);
   }
-);
+});
 
 router.get(
   "/doc",
   oauthScopes(swaggerDocument, extractor),
-  async (req, res, next) => {
+  (req, res, next) => {
     try {
       res.send("ok");
     } catch (e) {
@@ -37,7 +33,7 @@ router.get(
 router.get(
   "/wrong",
   oauthScopes(swaggerDocument, extractor),
-  async (req, res, next) => {
+  (req, res, next) => {
     try {
       res.send("ok");
     } catch (e) {
