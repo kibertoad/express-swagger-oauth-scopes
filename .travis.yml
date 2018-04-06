@@ -1,0 +1,15 @@
+# .travis.yml
+language: node_js
+
+node_js:
+	- '6'
+	- '8'
+
+script:
+	- npm run-script test-travis
+
+after_script:
+	- npm run-script coveralls
+
+notifications:
+	email: true
