@@ -1,6 +1,10 @@
 # express-swagger-oauth-scopes
 Express.js middleware to grant/block access to endpoints based on Swagger security entries
 
+  [![NPM Version][npm-image]][npm-url]
+  [![NPM Downloads][downloads-image]][downloads-url]
+  [![Linux Build][travis-image]][travis-url]
+
 Note that it should be applied within router and not globally on application since it depends on route being already resolved for the request.
 
 
@@ -164,3 +168,10 @@ module.exports = {
 	getSwaggerSync
 };
 ```
+
+[npm-image]: https://img.shields.io/npm/v/express-swagger-oauth-scopes.svg
+[npm-url]: https://npmjs.org/package/express-swagger-oauth-scopes
+[downloads-image]: https://img.shields.io/npm/dm/express-swagger-oauth-scopes.svg
+[downloads-url]: https://npmjs.org/package/express-swagger-oauth-scopes
+[travis-image]: https://img.shields.io/travis/kibertoad/express-swagger-oauth-scopes/master.svg?label=linux
+[travis-url]: https://travis-ci.org/kibertoad/express-swagger-oauth-scopes
