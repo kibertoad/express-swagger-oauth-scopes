@@ -8,7 +8,7 @@ require("../helpers/test.bootstrap");
 
 describe("GET /", () => {
   let app;
-  before(async () => {
+  before(() => {
     app = express();
     app.use("/", require("../controllers/test.controller"));
 
@@ -16,11 +16,11 @@ describe("GET /", () => {
       res.status(500).json({ details: err.message });
     });
 
-    await appHelper.launchApp(app);
+    return appHelper.launchApp(app);
   });
 
-  it("accepts if scopes are exact match for root endpoint", async () => {
-    await request(app)
+  it("accepts if scopes are exact match for root endpoint", () => {
+    return request(app)
       .get("/")
       .query({
         scopes: ["read:root"]
@@ -28,8 +28,8 @@ describe("GET /", () => {
       .expect(200);
   });
 
-  it("accepts if scopes are exact match for non-root endpoint", async () => {
-    await request(app)
+  it("accepts if scopes are exact match for non-root endpoint", () => {
+    return request(app)
       .get("/doc")
       .query({
         scopes: ["read:doc"]
@@ -37,8 +37,8 @@ describe("GET /", () => {
       .expect(200);
   });
 
-  it("accepts if user has excessive scopes", async () => {
-    await request(app)
+  it("accepts if user has excessive scopes", () => {
+    return request(app)
       .get("/")
       .query({
         scopes: ["dummy", "read:root", "dummier"]
@@ -46,14 +46,14 @@ describe("GET /", () => {
       .expect(200);
   });
 
-  it("rejects if user has no scopes", async () => {
-    await request(app)
+  it("rejects if user has no scopes", () => {
+    return request(app)
       .get("/")
       .expect(500);
   });
 
-  it("rejects if uas has wrong scopes", async () => {
-    await request(app)
+  it("rejects if user has wrong scopes", () => {
+    return request(app)
       .get("/")
       .query({
         scopes: ["write:root"]
@@ -61,13 +61,16 @@ describe("GET /", () => {
       .expect(500);
   });
 
-  it("throws an error if endpoint has no defined swagger entry", async () => {
-    const response = await request(app)
+  it("throws an error if endpoint has no defined swagger entry", done => {
+    request(app)
       .get("/wrong")
       .query({
         scopes: ["write:root"]
       })
-      .expect(500);
-    assert.equal(response.body.details, "No Swagger entry for GET /wrong");
+      .expect(500)
+      .then(response => {
+        assert.equal(response.body.details, "No Swagger entry for GET /wrong");
+        done();
+      });
   });
 });
