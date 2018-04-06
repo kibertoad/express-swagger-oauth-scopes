@@ -7,6 +7,12 @@
   },
   "author": "Igor Savin",
   "license": "MIT",
+  "keywords": [
+    "swagger",
+    "oauth",
+    "express",
+    "authorization"
+  ],
   "scripts": {
     "test": "mocha --opts \"./mocha.opts\" test/**/*.spec.js",
     "test-with-coverage": "nyc mocha --opts \"./mocha.opts\" test",
