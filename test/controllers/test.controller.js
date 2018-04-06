@@ -33,7 +33,7 @@ router.get(
 router.get(
   "/wrong",
   oauthScopes(swaggerDocument, extractor),
-  async (req, res, next) => {
+  (req, res, next) => {
     try {
       res.send("ok");
     } catch (e) {
