@@ -1,6 +1,6 @@
 {
   "name": "express-swagger-oauth-scopes",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kibertoad/express-swagger-oauth-scopes.git"
@@ -9,15 +9,15 @@
   "license": "MIT",
   "scripts": {
     "test": "mocha --opts \"./mocha.opts\" test/**/*.spec.js",
-    "prettier": "prettier --write \"{lib,tests}/**/*.{js,ts}\"",
-    "eslint": "eslint --format codeframe \"lib/**/*.js\" \"tests/**/*.js\""
+    "prettier": "prettier --write \"{lib,test}/**/*.{js,ts}\"",
+    "eslint": "eslint --format codeframe \"lib/**/*.js\" \"test/**/*.js\""
   },
   "dependencies": {
     "validate-scope": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.17.0",
+    "eslint": "^4.19.1",
     "eslint-plugin-prettier": "^2.6.0",
     "express": "^4.16.3",
     "js-yaml": "^3.11.0",

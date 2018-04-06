@@ -1,5 +1,5 @@
 function extractScopes(req) {
-	return req.query.scopes;
+  return req.query.scopes;
 }
 
 module.exports = extractScopes;
