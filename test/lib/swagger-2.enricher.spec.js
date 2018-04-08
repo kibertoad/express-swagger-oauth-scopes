@@ -82,24 +82,24 @@ describe("oauth-scopes.middleware", () => {
     );
 
     assert.deepEqual(swaggerDocument, {
-      "swagger": "2.0",
-      "info": {
-        "version": "1.0.0",
-        "title": "Security Test",
-        "license": {
-          "name": "MIT"
+      swagger: "2.0",
+      info: {
+        version: "1.0.0",
+        title: "Security Test",
+        license: {
+          name: "MIT"
         }
       },
-      "securityDefinitions": {
-        "oauth": {
-          "type": "oauth2",
-          "authorizationUrl": "https://example.com/oauth/authorize",
-          "flow": "accessCode ",
-          "scopes": {
+      securityDefinitions: {
+        oauth: {
+          type: "oauth2",
+          authorizationUrl: "https://example.com/oauth/authorize",
+          flow: "accessCode ",
+          scopes: {
             "read:root": "read permissions for root endpoint",
             "read:doc": "read permissions for doc endpoint"
           },
-          "tokenUrl": "https://example.com/oauth/token"
+          tokenUrl: "https://example.com/oauth/token"
         }
       }
     });

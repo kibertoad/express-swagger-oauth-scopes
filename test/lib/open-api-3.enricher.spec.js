@@ -31,22 +31,22 @@ describe("oauth-scopes.middleware", () => {
     );
 
     assert.deepEqual(swaggerDocument, {
-      "openapi": "3.0.0",
-      "info": {
-        "version": "1.0.0",
-        "title": "Security Test",
-        "license": {
-          "name": "MIT"
+      openapi: "3.0.0",
+      info: {
+        version: "1.0.0",
+        title: "Security Test",
+        license: {
+          name: "MIT"
         }
       },
-      "components": {
-        "securitySchemes": {
-          "oauth": {
-            "type": "oauth2",
-            "flows": {
-              "implicit": {
-                "authorizationUrl": "http://api.example.com/api/auth",
-                "scopes": {
+      components: {
+        securitySchemes: {
+          oauth: {
+            type: "oauth2",
+            flows: {
+              implicit: {
+                authorizationUrl: "http://api.example.com/api/auth",
+                scopes: {
                   "read:root": "read permissions for root endpoint",
                   "read:doc": "read permissions for doc endpoint"
                 }
@@ -87,26 +87,26 @@ describe("oauth-scopes.middleware", () => {
     );
 
     assert.deepEqual(swaggerDocument, {
-      "openapi": "3.0.0",
-      "info": {
-        "version": "1.0.0",
-        "title": "Security Test",
-        "license": {
-          "name": "MIT"
+      openapi: "3.0.0",
+      info: {
+        version: "1.0.0",
+        title: "Security Test",
+        license: {
+          name: "MIT"
         }
       },
-      "components": {
-        "securitySchemes": {
-          "oauth": {
-            "type": "oauth2",
-            "flows": {
-              "authorizationCode": {
-                "authorizationUrl": "https://example.com/oauth/authorize",
-                "scopes": {
+      components: {
+        securitySchemes: {
+          oauth: {
+            type: "oauth2",
+            flows: {
+              authorizationCode: {
+                authorizationUrl: "https://example.com/oauth/authorize",
+                scopes: {
                   "read:root": "read permissions for root endpoint",
                   "read:doc": "read permissions for doc endpoint"
                 },
-                "tokenUrl": "https://example.com/oauth/token"
+                tokenUrl: "https://example.com/oauth/token"
               }
             }
           }
