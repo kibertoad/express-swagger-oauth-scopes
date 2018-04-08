@@ -31,27 +31,87 @@ describe("oauth-scopes.middleware", () => {
     );
 
     assert.deepEqual(swaggerDocument, {
-      components: {
-        securitySchemes: {
-          oauth: {
-            authorizationUrl: "http://api.example.com/api/auth",
-            flow: "implicit",
-            scopes: {
-              "read:doc": "read permissions for doc endpoint",
-              "read:root": "read permissions for root endpoint"
-            },
-            type: "oauth2"
-          }
+      "openapi": "3.0.0",
+      "info": {
+        "version": "1.0.0",
+        "title": "Security Test",
+        "license": {
+          "name": "MIT"
         }
       },
+      "components": {
+        "securitySchemes": {
+          "oauth": {
+            "type": "oauth2",
+            "flows": {
+              "implicit": {
+                "authorizationUrl": "http://api.example.com/api/auth",
+                "scopes": {
+                  "read:root": "read permissions for root endpoint",
+                  "read:doc": "read permissions for doc endpoint"
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+
+  it("adds OpenAPI 3.0 security definitions with tokenUrl to a document", () => {
+    const swaggerDocument = {
+      openapi: "3.0.0",
       info: {
+        version: "1.0.0",
+        title: "Security Test",
         license: {
           name: "MIT"
+        }
+      }
+    };
+    openApiEnricher.enrichWithSecurityDefinitions(
+      swaggerDocument,
+      "https://example.com/oauth/authorize",
+      "https://example.com/oauth/token",
+      "authorizationCode",
+      [
+        {
+          name: "read:root",
+          description: "read permissions for root endpoint"
         },
-        title: "Security Test",
-        version: "1.0.0"
+        {
+          name: "read:doc",
+          description: "read permissions for doc endpoint"
+        }
+      ]
+    );
+
+    assert.deepEqual(swaggerDocument, {
+      "openapi": "3.0.0",
+      "info": {
+        "version": "1.0.0",
+        "title": "Security Test",
+        "license": {
+          "name": "MIT"
+        }
       },
-      openapi: "3.0.0"
+      "components": {
+        "securitySchemes": {
+          "oauth": {
+            "type": "oauth2",
+            "flows": {
+              "authorizationCode": {
+                "authorizationUrl": "https://example.com/oauth/authorize",
+                "scopes": {
+                  "read:root": "read permissions for root endpoint",
+                  "read:doc": "read permissions for doc endpoint"
+                },
+                "tokenUrl": "https://example.com/oauth/token"
+              }
+            }
+          }
+        }
+      }
     });
   });
 });
