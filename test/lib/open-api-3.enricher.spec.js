@@ -1,10 +1,10 @@
 const assert = require("chai").assert;
-const swaggerEnricher = require("../../lib/swagger-2.enricher");
+const openApiEnricher = require("../../lib/open-api-3.enricher");
 
 describe("oauth-scopes.middleware", () => {
-  it("adds OAuth 2.0 security definitions to a document without any", () => {
+  it("adds OpenAPI 3.0 security definitions to a document without any", () => {
     const swaggerDocument = {
-      swagger: "2.0",
+      openapi: "3.0.0",
       info: {
         version: "1.0.0",
         title: "Security Test",
@@ -13,7 +13,7 @@ describe("oauth-scopes.middleware", () => {
         }
       }
     };
-    swaggerEnricher.enrichWithSecurityDefinitions(
+    openApiEnricher.enrichWithSecurityDefinitions(
       swaggerDocument,
       "http://api.example.com/api/auth",
       null,
@@ -31,25 +31,27 @@ describe("oauth-scopes.middleware", () => {
     );
 
     assert.deepEqual(swaggerDocument, {
-      swagger: "2.0",
-      info: {
-        version: "1.0.0",
-        title: "Security Test",
-        license: {
-          name: "MIT"
-        }
-      },
-      securityDefinitions: {
-        oauth: {
-          type: "oauth2",
-          authorizationUrl: "http://api.example.com/api/auth",
-          flow: "implicit",
-          scopes: {
-            "read:root": "read permissions for root endpoint",
-            "read:doc": "read permissions for doc endpoint"
+      components: {
+        securitySchemes: {
+          oauth: {
+            authorizationUrl: "http://api.example.com/api/auth",
+            flow: "implicit",
+            scopes: {
+              "read:doc": "read permissions for doc endpoint",
+              "read:root": "read permissions for root endpoint"
+            },
+            type: "oauth2"
           }
         }
-      }
+      },
+      info: {
+        license: {
+          name: "MIT"
+        },
+        title: "Security Test",
+        version: "1.0.0"
+      },
+      openapi: "3.0.0"
     });
   });
 });
