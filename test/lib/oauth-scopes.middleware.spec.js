@@ -6,7 +6,7 @@ const assert = require("chai").assert;
 const appHelper = require("../helpers/test.app.helper");
 require("../helpers/test.bootstrap");
 
-describe("GET /", () => {
+describe("oauth-scopes.middleware", () => {
   let app;
   before(() => {
     app = express();
