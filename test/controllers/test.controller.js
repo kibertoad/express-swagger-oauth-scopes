@@ -31,6 +31,19 @@ router.get(
 );
 
 router.get(
+  "/doc-explicit",
+  oauthScopes(swaggerDocument, extractor, "/explicitly-doc"),
+  (req, res, next) => {
+    try {
+      res.send("ok");
+    } catch (e) {
+      console.error("Error while processing request: ", e);
+      next(e);
+    }
+  }
+);
+
+router.get(
   "/wrong",
   oauthScopes(swaggerDocument, extractor),
   (req, res, next) => {

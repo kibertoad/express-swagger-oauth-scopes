@@ -1,10 +1,11 @@
 const http = require("http");
 
-function launchApp(app) {
+function launchApp(app, port) {
+  port = port || 9999;
   const server = http.createServer(app);
 
   return new Promise((resolve, reject) => {
-    server.listen(9999, () => {
+    server.listen(port, () => {
       global.app = app;
       global.server = server;
       resolve(app);

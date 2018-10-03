@@ -37,6 +37,15 @@ describe("oauth-scopes.middleware", () => {
       .expect(200);
   });
 
+  it("supports explicit mapping of middleware to path", () => {
+    return request(app)
+      .get("/doc-explicit")
+      .query({
+        scopes: ["read:doc"]
+      })
+      .expect(200);
+  });
+
   it("accepts if user has excessive scopes", () => {
     return request(app)
       .get("/")

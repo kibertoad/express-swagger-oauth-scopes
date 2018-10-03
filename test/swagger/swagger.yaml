@@ -32,3 +32,11 @@ paths:
       responses:
         '200':
           description: OK
+  /explicitly-doc:
+    get:
+      security:
+      - oauth:
+        - 'read:doc'
+      responses:
+        '200':
+          description: OK

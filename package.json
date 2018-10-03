@@ -1,6 +1,6 @@
 {
   "name": "express-swagger-oauth-scopes",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kibertoad/express-swagger-oauth-scopes.git"
@@ -32,7 +32,6 @@
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "prettier": "^1.14.3",
-    "sinon": "^6.3.5",
     "supertest": "^3.3.0"
   },
   "nyc": {

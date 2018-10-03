@@ -6,7 +6,7 @@ Express.js middleware to grant/block access to endpoints based on Swagger securi
   [![Linux Build][travis-image]][travis-url]
 
 Note that it should be applied within router and not globally on application since it depends on route being already resolved for the request.
-
+Alternatively you can explicitly pass path to a endpoint when instantiating a middleware (this is necessary when you are using middleware inside Google Cloud Function which does not provide access to router).
 
 ```js
 const swaggerOauth = require('express-swagger-oauth-scopes').middleware;
@@ -18,8 +18,22 @@ function getNewSwaggerOauthInstance() {
 	return swaggerOauth(swaggerDocument, authUtils.getPermissionsFromRequest);
 }
 
+function getNewSwaggerOauthInstanceExplicitPath(path) {
+	return swaggerOauth(swaggerDocument, authUtils.getPermissionsFromRequest, path);
+}
+
 router.post('/users',
 	getNewSwaggerOauthInstance(),
+	async (req, res, next) => {
+		try {
+		  // user creation logic
+		} catch (e) {
+			return next(e);
+		}
+	});
+
+router.post('/users-explicit',
+	getNewSwaggerOauthInstanceExplicitPath('/users-explicit'),
 	async (req, res, next) => {
 		try {
 		  // user creation logic
