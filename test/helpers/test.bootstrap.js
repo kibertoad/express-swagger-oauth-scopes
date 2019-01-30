@@ -1,7 +1,7 @@
 after(function() {
   this.timeout(10000);
 
-  console.log("Cleaning up after tests.");
+  console.log('Cleaning up after tests.');
   if (global.server) {
     try {
       global.server.close();
