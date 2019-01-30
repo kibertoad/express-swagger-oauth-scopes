@@ -1,16 +1,16 @@
-const express = require("express");
+const express = require('express');
 
-const request = require("supertest");
-const assert = require("chai").assert;
+const request = require('supertest');
+const assert = require('chai').assert;
 
-const appHelper = require("../helpers/test.app.helper");
-require("../helpers/test.bootstrap");
+const appHelper = require('../helpers/test.app.helper');
+require('../helpers/test.bootstrap');
 
-describe("oauth-scopes.middleware", () => {
+describe('oauth-scopes.middleware', () => {
   let app;
   before(() => {
     app = express();
-    app.use("/", require("../controllers/test.controller"));
+    app.use('/', require('../controllers/test.controller'));
 
     app.use((err, req, res, next) => {
       res.status(500).json({ details: err.message });
@@ -19,66 +19,66 @@ describe("oauth-scopes.middleware", () => {
     return appHelper.launchApp(app);
   });
 
-  it("accepts if scopes are exact match for root endpoint", () => {
+  it('accepts if scopes are exact match for root endpoint', () => {
     return request(app)
-      .get("/")
+      .get('/')
       .query({
-        scopes: ["read:root"]
+        scopes: ['read:root']
       })
       .expect(200);
   });
 
-  it("accepts if scopes are exact match for non-root endpoint", () => {
+  it('accepts if scopes are exact match for non-root endpoint', () => {
     return request(app)
-      .get("/doc")
+      .get('/doc')
       .query({
-        scopes: ["read:doc"]
+        scopes: ['read:doc']
       })
       .expect(200);
   });
 
-  it("supports explicit mapping of middleware to path", () => {
+  it('supports explicit mapping of middleware to path', () => {
     return request(app)
-      .get("/doc-explicit")
+      .get('/doc-explicit')
       .query({
-        scopes: ["read:doc"]
+        scopes: ['read:doc']
       })
       .expect(200);
   });
 
-  it("accepts if user has excessive scopes", () => {
+  it('accepts if user has excessive scopes', () => {
     return request(app)
-      .get("/")
+      .get('/')
       .query({
-        scopes: ["dummy", "read:root", "dummier"]
+        scopes: ['dummy', 'read:root', 'dummier']
       })
       .expect(200);
   });
 
-  it("rejects if user has no scopes", () => {
+  it('rejects if user has no scopes', () => {
     return request(app)
-      .get("/")
+      .get('/')
       .expect(500);
   });
 
-  it("rejects if user has wrong scopes", () => {
+  it('rejects if user has wrong scopes', () => {
     return request(app)
-      .get("/")
+      .get('/')
       .query({
-        scopes: ["write:root"]
+        scopes: ['write:root']
       })
       .expect(500);
   });
 
-  it("throws an error if endpoint has no defined swagger entry", done => {
+  it('throws an error if endpoint has no defined swagger entry', done => {
     request(app)
-      .get("/wrong")
+      .get('/wrong')
       .query({
-        scopes: ["write:root"]
+        scopes: ['write:root']
       })
       .expect(500)
       .then(response => {
-        assert.equal(response.body.details, "No Swagger entry for GET /wrong");
+        assert.equal(response.body.details, 'No Swagger entry for GET /wrong');
         done();
       });
   });

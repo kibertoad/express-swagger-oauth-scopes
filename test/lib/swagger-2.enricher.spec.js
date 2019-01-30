@@ -1,105 +1,105 @@
-const assert = require("chai").assert;
-const swaggerEnricher = require("../../lib/swagger-2.enricher");
+const assert = require('chai').assert;
+const swaggerEnricher = require('../../lib/swagger-2.enricher');
 
-describe("oauth-scopes.middleware", () => {
-  it("adds OAuth 2.0 security definitions to a document without any", () => {
+describe('oauth-scopes.middleware', () => {
+  it('adds OAuth 2.0 security definitions to a document without any', () => {
     const swaggerDocument = {
-      swagger: "2.0",
+      swagger: '2.0',
       info: {
-        version: "1.0.0",
-        title: "Security Test",
+        version: '1.0.0',
+        title: 'Security Test',
         license: {
-          name: "MIT"
+          name: 'MIT'
         }
       }
     };
     swaggerEnricher.enrichWithSecurityDefinitions(
       swaggerDocument,
-      "http://api.example.com/api/auth",
+      'http://api.example.com/api/auth',
       null,
-      "implicit",
+      'implicit',
       [
         {
-          name: "read:root",
-          description: "read permissions for root endpoint"
+          name: 'read:root',
+          description: 'read permissions for root endpoint'
         },
         {
-          name: "read:doc",
-          description: "read permissions for doc endpoint"
+          name: 'read:doc',
+          description: 'read permissions for doc endpoint'
         }
       ]
     );
 
     assert.deepEqual(swaggerDocument, {
-      swagger: "2.0",
+      swagger: '2.0',
       info: {
-        version: "1.0.0",
-        title: "Security Test",
+        version: '1.0.0',
+        title: 'Security Test',
         license: {
-          name: "MIT"
+          name: 'MIT'
         }
       },
       securityDefinitions: {
         oauth: {
-          type: "oauth2",
-          authorizationUrl: "http://api.example.com/api/auth",
-          flow: "implicit",
+          type: 'oauth2',
+          authorizationUrl: 'http://api.example.com/api/auth',
+          flow: 'implicit',
           scopes: {
-            "read:root": "read permissions for root endpoint",
-            "read:doc": "read permissions for doc endpoint"
+            'read:root': 'read permissions for root endpoint',
+            'read:doc': 'read permissions for doc endpoint'
           }
         }
       }
     });
   });
 
-  it("adds OAuth 2.0 security definitions with tokenUrl to a document", () => {
+  it('adds OAuth 2.0 security definitions with tokenUrl to a document', () => {
     const swaggerDocument = {
-      swagger: "2.0",
+      swagger: '2.0',
       info: {
-        version: "1.0.0",
-        title: "Security Test",
+        version: '1.0.0',
+        title: 'Security Test',
         license: {
-          name: "MIT"
+          name: 'MIT'
         }
       }
     };
     swaggerEnricher.enrichWithSecurityDefinitions(
       swaggerDocument,
-      "https://example.com/oauth/authorize",
-      "https://example.com/oauth/token",
-      "accessCode ",
+      'https://example.com/oauth/authorize',
+      'https://example.com/oauth/token',
+      'accessCode ',
       [
         {
-          name: "read:root",
-          description: "read permissions for root endpoint"
+          name: 'read:root',
+          description: 'read permissions for root endpoint'
         },
         {
-          name: "read:doc",
-          description: "read permissions for doc endpoint"
+          name: 'read:doc',
+          description: 'read permissions for doc endpoint'
         }
       ]
     );
 
     assert.deepEqual(swaggerDocument, {
-      swagger: "2.0",
+      swagger: '2.0',
       info: {
-        version: "1.0.0",
-        title: "Security Test",
+        version: '1.0.0',
+        title: 'Security Test',
         license: {
-          name: "MIT"
+          name: 'MIT'
         }
       },
       securityDefinitions: {
         oauth: {
-          type: "oauth2",
-          authorizationUrl: "https://example.com/oauth/authorize",
-          flow: "accessCode ",
+          type: 'oauth2',
+          authorizationUrl: 'https://example.com/oauth/authorize',
+          flow: 'accessCode ',
           scopes: {
-            "read:root": "read permissions for root endpoint",
-            "read:doc": "read permissions for doc endpoint"
+            'read:root': 'read permissions for root endpoint',
+            'read:doc': 'read permissions for doc endpoint'
           },
-          tokenUrl: "https://example.com/oauth/token"
+          tokenUrl: 'https://example.com/oauth/token'
         }
       }
     });
