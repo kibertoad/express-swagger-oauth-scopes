@@ -19,7 +19,7 @@ function getNewSwaggerOauthInstance() {
 }
 
 function getNewSwaggerOauthInstanceExplicitPath(path) {
-	return swaggerOauth(swaggerDocument, authUtils.getPermissionsFromRequest, path);
+	return swaggerOauth(swaggerDocument, authUtils.getPermissionsFromRequest, 'oauth', path);
 }
 
 router.post('/users',
