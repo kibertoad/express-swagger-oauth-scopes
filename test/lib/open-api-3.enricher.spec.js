@@ -1,5 +1,5 @@
-const assert = require('chai').assert
-const openApiEnricher = require('../../lib/open-api-3.enricher')
+const assert = require('chai').assert;
+const openApiEnricher = require('../../lib/open-api-3.enricher');
 
 describe('oauth-scopes.middleware', () => {
   it('adds OpenAPI 3.0 security definitions to a document without any', () => {
@@ -12,7 +12,7 @@ describe('oauth-scopes.middleware', () => {
           name: 'MIT'
         }
       }
-    }
+    };
     openApiEnricher.enrichWithSecurityDefinitions(
       swaggerDocument,
       'http://api.example.com/api/auth',
@@ -28,7 +28,7 @@ describe('oauth-scopes.middleware', () => {
           description: 'read permissions for doc endpoint'
         }
       ]
-    )
+    );
 
     assert.deepEqual(swaggerDocument, {
       openapi: '3.0.0',
@@ -55,8 +55,8 @@ describe('oauth-scopes.middleware', () => {
           }
         }
       }
-    })
-  })
+    });
+  });
 
   it('adds OpenAPI 3.0 security definitions with tokenUrl to a document', () => {
     const swaggerDocument = {
@@ -68,7 +68,7 @@ describe('oauth-scopes.middleware', () => {
           name: 'MIT'
         }
       }
-    }
+    };
     openApiEnricher.enrichWithSecurityDefinitions(
       swaggerDocument,
       'https://example.com/oauth/authorize',
@@ -84,7 +84,7 @@ describe('oauth-scopes.middleware', () => {
           description: 'read permissions for doc endpoint'
         }
       ]
-    )
+    );
 
     assert.deepEqual(swaggerDocument, {
       openapi: '3.0.0',
@@ -112,6 +112,6 @@ describe('oauth-scopes.middleware', () => {
           }
         }
       }
-    })
-  })
-})
+    });
+  });
+});
