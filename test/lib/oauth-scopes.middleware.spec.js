@@ -40,7 +40,7 @@ describe('oauth-scopes.middleware', () => {
 
   it('supports explicit mapping of middleware to path', () => {
     const app = newExpressApp({
-      middleware: oauthScopes(swaggerDocument, extractor, '/explicitly-doc'),
+      middleware: oauthScopes(swaggerDocument, extractor, 'oauth', '/explicitly-doc'),
       endpoint: '/doc-explicit'
     })
 
